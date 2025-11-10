@@ -43,6 +43,16 @@ export class UserService {
     );
   }
 
+  public removeUser(id: number, userCode: string): Observable<HttpResponse<User[]>> { 
+    return this.#apiService.removeUser(id, userCode).pipe(
+      tap((result) => {
+        if (result?.body) {
+          this.#users.set(result.body);
+        }
+      })
+    );
+  }
+
   public drawNames(): Observable<HttpResponse<string>> {
     return this.#apiService.drawNames(this.#userCode()).pipe(
       tap(({ status }) => {

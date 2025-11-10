@@ -58,6 +58,8 @@ export class ParticipantCard {
   public readonly ariaLabelCopy = AriaLabel.ParticipantLink;
   public readonly iconInfo = IconName.Info;
   public readonly ariaLabelInfo = AriaLabel.Info;
+  public readonly iconRemove = IconName.Remove;
+  public readonly ariaLabelRemobe = AriaLabel.RemoveButton;
 
   @HostBinding('tabindex') tab = 0;
   @HostBinding('class.list-row') rowClass = true;
@@ -102,6 +104,20 @@ export class ParticipantCard {
     }
 
     this.#showPopup();
+  }
+
+  public onRemoveButtonClick(): void {
+    const userId = this.participant().id;
+    const userCode = this.userCode();
+    if (!userCode) return;
+
+    if (this.isCurrentUserAdmin() && !this.participant().isAdmin) {
+      this.#userService
+      .removeUser(userId, userCode)
+      .subscribe();
+
+      return;
+    }
   }
 
   public onCopyHover(target: EventTarget | null): void {
