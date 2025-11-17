@@ -166,6 +166,7 @@ export const enum ButtonText {
   ViewWishlist = 'View Wishlist',
   Cancel = 'Cancel',
   ViewInformation = 'View Information',
+  Confirm = 'Confirm',
 }
 
 export const enum ButtonType {
@@ -294,12 +295,14 @@ export const enum ModalTitle {
   ParticipantDetails = 'Participant Details',
   PersonalInformation = 'Personal Information',
   Invitation = 'Invite New Members',
+  ParticipantRemoval = 'Participant Removal',
 }
 
 export const enum ModalSubtitle {
   ParticipantInfo = 'Everything about your Secret Nick player!',
   PersonalInfo = 'Secret Nick needs to know where to send your present!',
   Invitation = 'Share the link below with 20 friends to invite them',
+  ParticipantRemoval = 'Remove user that was added by mistake',
 }
 
 export const enum PersonalInfoTerm {

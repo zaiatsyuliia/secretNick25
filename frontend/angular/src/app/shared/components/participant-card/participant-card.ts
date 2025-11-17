@@ -21,6 +21,8 @@ import { PopupService } from '../../../core/services/popup';
 import { copyToClipboard } from '../../../utils/copy';
 import { UrlService } from '../../../core/services/url';
 import { ParticipantInfoModal } from '../../../room/components/participant-info-modal/participant-info-modal';
+import { ParticipantRemovalModal } from '../../../room/components/participant-removal-modal/participant-removal-modal';
+
 import { ModalService } from '../../../core/services/modal';
 import { getPersonalInfo } from '../../../utils/get-personal-info';
 import { UserService } from '../../../room/services/user';
@@ -107,18 +109,12 @@ export class ParticipantCard {
   }
 
   public onRemoveButtonClick(): void {
-    const userId = this.participant().id;
-    const userCode = this.userCode();
-    if (!userCode) return;
-
     if (this.isCurrentUserAdmin() && !this.participant().isAdmin) {
-      this.#userService
-      .removeUser(userId, userCode)
-      .subscribe();
-
+      this.#openRemovalModal();
       return;
     }
   }
+
 
   public onCopyHover(target: EventTarget | null): void {
     if (target instanceof HTMLElement) {
@@ -135,6 +131,29 @@ export class ParticipantCard {
     if (target instanceof HTMLElement) {
       this.#popup.hide(target);
     }
+  }
+
+  #openRemovalModal(): void {
+    const participantName = this.participant().firstName + ' ' + this.participant().lastName; 
+
+    this.#modalService.openWithResult(
+      ParticipantRemovalModal,
+      { participantName },
+      {
+        confirm: () => this.#confirmRemoval(),
+        cancel: () => this.#modalService.close(),
+      }
+    );
+  }
+
+  #confirmRemoval(): void {
+    const userId = this.participant().id;
+    const userCode = this.userCode();
+    if (!userCode) return;
+
+    this.#userService.removeUser(userId, userCode).subscribe(() => {
+      this.#modalService.close();
+    });
   }
 
   #openModal(): void {

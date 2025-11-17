@@ -1,0 +1,17 @@
+<app-common-modal-template
+  [headerPictureName]="pictureName"
+  [headerTitle]="title"
+  [buttonText]="buttonText"
+  [subtitle]="subtitle"
+  (buttonAction)="onConfirmClick()"
+  (closeModal)="onCancelClick()"
+>
+  <div class="modal__content">
+    <section class="modal__content-item">
+      <p class="modal__text" style="font-size: 18px;">
+        Are you sure that you want to remove participant
+        <strong>{{ participantName() }}</strong>?
+      </p>
+    </section>
+  </div>
+</app-common-modal-template>
