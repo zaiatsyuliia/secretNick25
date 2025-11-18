@@ -54,7 +54,7 @@ web_ui_port       = 80
 ################################################################################
 #Amazon Linux 2023 AMI 2023.8.20250808.1 x86_64 HVM kernel-6.1 in eu-central-1
 
-ami          = "ami-0014f42880c4347c1"
+ami          = "ami-015cbce10f839bd0c"
 ec2_name_set = ["react", "angular", "dotnet"]
 subnet       = ""
 sgs          = []
@@ -72,5 +72,5 @@ db_id                = "postgres-db"
 db_username          = "postgres"
 db_engine            = "postgres"
 db_engine_version    = "17.5"
-db_instance_class    = "db.t3.micro"
+db_instance_class    = "db.t4g.micro"
 db_subnet_group_name = "rds-private-subnet-group"
