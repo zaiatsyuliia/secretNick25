@@ -54,7 +54,7 @@ web_ui_port       = 80
 ################################################################################
 #Amazon Linux 2023 AMI 2023.8.20250808.1 x86_64 HVM kernel-6.1 in eu-central-1
 
-ami          = "ami-015cbce10f839bd0c"
+ami          = "ami-0014f42880c4347c1"
 ec2_name_set = ["react", "angular", "dotnet"]
 subnet       = ""
 sgs          = []
