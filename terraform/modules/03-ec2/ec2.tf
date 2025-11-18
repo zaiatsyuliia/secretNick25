@@ -4,21 +4,6 @@ data "aws_availability_zones" "available" {
   state = "available"
 }
 
-data "aws_ami" "free_tier_arm64_ami" {
-  owners      = ["amazon"]
-  most_recent = true
-
-  filter {
-    name   = "name"
-    values = ["amzn2-ami-hvm-*-arm64-gp2"] 
-  }
-
-  filter {
-    name   = "architecture"
-    values = ["arm64"]
-  }
-}
-
 locals {
   instance_id = try(
     aws_instance.this.id,
@@ -99,7 +84,7 @@ resource "aws_iam_instance_profile" "this" {
 ################################################################################
 
 resource "aws_instance" "this" {
-  ami                         = data.aws_ami.free_tier_arm64_ami.id
+  ami                         = var.ami
   associate_public_ip_address = var.associate_public_ip_address
   availability_zone           = data.aws_availability_zones.available.names[0]
   iam_instance_profile        = var.create_iam_instance_profile ? aws_iam_instance_profile.this[0].name : var.iam_instance_profile
